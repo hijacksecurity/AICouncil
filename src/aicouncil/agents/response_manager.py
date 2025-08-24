@@ -99,11 +99,17 @@ class ResponseManager:
         message: str,
         context: ConversationContext,
         include_catchphrase: bool = False,
-        tool_manager: Optional[ToolManager] = None
+        tool_manager: Optional[ToolManager] = None,
+        minimal_context: bool = False
     ) -> Message:
         """Generate response with full context management and optional tool use"""
-        # Get appropriate context window, excluding this agent's own responses to avoid "same question" issue
-        context_text, context_tokens = context.get_context_window(exclude_agent=agent.name)
+        if minimal_context:
+            # For direct messages, use minimal context to avoid "duplicate question" issues
+            context_text = f"User: {message}"
+            context_tokens = len(context_text) // 4
+        else:
+            # Get appropriate context window, excluding this agent's own responses to avoid "same question" issue
+            context_text, context_tokens = context.get_context_window(exclude_agent=agent.name)
         
         # Check if agent should use tools
         tool_output = ""

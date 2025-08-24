@@ -42,8 +42,12 @@ class Council:
         self.display.display_welcome()
         self.display.display_team_members(self.agents)
         
-        print(f"\n{Fore.WHITE}Type 'exit' to leave, 'reset' to clear history, or 'help' for commands{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}{Style.DIM}Agents can now use real tools for their jobs - try asking about AWS, Kubernetes, APIs, etc.{Style.RESET_ALL}\n")
+        print(f"\n{Fore.YELLOW}💡 Quick Start:{Style.RESET_ALL}")
+        print(f"  • Just ask naturally: {Fore.GREEN}\"Check our AWS status\"{Style.RESET_ALL}")
+        print(f"  • Direct message: {Fore.GREEN}\"@gilfoyle what's our infrastructure?\"{Style.RESET_ALL}")
+        print(f"  • Get all agents: {Fore.GREEN}\"@all how should we scale this?\"{Style.RESET_ALL}")
+        print(f"\n{Fore.WHITE}Commands: 'help' for more info | 'exit' to leave | 'reset' to clear{Style.RESET_ALL}")
+        print(f"{Fore.CYAN}{Style.DIM}Agents have real tools - try asking about AWS, Kubernetes, APIs, security, etc.{Style.RESET_ALL}\n")
 
         while True:
             try:
@@ -252,7 +256,8 @@ class Council:
                 message=content,
                 context=self.context_manager,
                 include_catchphrase=True,
-                tool_manager=self.tool_manager
+                tool_manager=self.tool_manager,
+                minimal_context=True  # Direct messages use minimal context to avoid "duplicate" issues
             )
             
             print(response_msg.content)

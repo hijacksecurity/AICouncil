@@ -34,8 +34,27 @@ An interactive multi-agent system featuring 6 AI personalities with distinct exp
 
 3. **Run the council**:
    ```bash
+   # Option 1: Global command (recommended)
+   council
+   
+   # Option 2: Direct execution
    cd src && python run.py
    ```
+
+## Global Command Setup 🔧
+
+After installation, you can run `council` from anywhere in your terminal:
+
+```bash
+# Set your API key (one-time setup)
+export ANTHROPIC_API_KEY='your-key-here'
+
+# Add to your shell profile for permanent setup
+echo 'export ANTHROPIC_API_KEY="your-key-here"' >> ~/.bashrc  # or ~/.zshrc
+
+# Run from anywhere
+council
+```
 
 ## Usage Examples 💬
 

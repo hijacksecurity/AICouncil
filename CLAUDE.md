@@ -90,7 +90,29 @@ pip install -r requirements.txt
 export ANTHROPIC_API_KEY='your-key-here'  # On Windows: set ANTHROPIC_API_KEY=your-key-here
 
 # Run the interactive council with MCP support
+# Option 1: Global command (recommended)
+council
+
+# Option 2: Direct execution  
 cd src && python run.py
+```
+
+## Global Command Setup
+
+The `council` script automatically:
+- Detects and activates the virtual environment
+- Checks for required API key
+- Runs from the correct directory
+- Provides helpful error messages
+
+To set up permanently:
+```bash
+# Add API key to your shell profile
+echo 'export ANTHROPIC_API_KEY="your-key-here"' >> ~/.bashrc  # or ~/.zshrc
+source ~/.bashrc  # or restart terminal
+
+# Now run from anywhere
+council
 ```
 
 ## MCP Server Setup (Optional but Recommended)

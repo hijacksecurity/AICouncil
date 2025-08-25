@@ -89,12 +89,11 @@ pip install -r requirements.txt
 # Set up environment variable (required)
 export ANTHROPIC_API_KEY='your-key-here'  # On Windows: set ANTHROPIC_API_KEY=your-key-here
 
-# Run the interactive council with MCP support
-# Option 1: Global command (recommended)
-council
+# Install globally (one-time setup)
+./council install
 
-# Option 2: Direct execution  
-cd src && python run.py
+# Run the interactive council with MCP support
+council
 ```
 
 ## Global Command Setup

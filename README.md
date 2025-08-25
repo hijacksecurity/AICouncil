@@ -32,13 +32,14 @@ An interactive multi-agent system featuring 6 AI personalities with distinct exp
    export ANTHROPIC_API_KEY='your-key-here'
    ```
 
-3. **Run the council**:
+3. **Install globally** (one-time setup):
    ```bash
-   # Option 1: Global command (recommended)
+   ./council install
+   ```
+
+4. **Run from anywhere**:
+   ```bash
    council
-   
-   # Option 2: Direct execution
-   cd src && python run.py
    ```
 
 ## Global Command Setup 🔧

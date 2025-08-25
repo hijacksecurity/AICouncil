@@ -43,18 +43,27 @@ An interactive multi-agent system featuring 6 AI personalities with distinct exp
 
 ## Global Command Setup 🔧
 
-After installation, you can run `council` from anywhere in your terminal:
+Install the `council` command globally:
 
 ```bash
-# Set your API key (one-time setup)
+# One-time setup - makes 'council' available anywhere
+./council install
+
+# Set your API key
 export ANTHROPIC_API_KEY='your-key-here'
 
-# Add to your shell profile for permanent setup
+# Add to shell profile for permanent setup  
 echo 'export ANTHROPIC_API_KEY="your-key-here"' >> ~/.bashrc  # or ~/.zshrc
 
 # Run from anywhere
 council
 ```
+
+**Single file does it all:**
+- `./council install` - Sets up global command
+- `council` - Runs the application from anywhere
+- Auto-detects project location, works for any user
+- Optional `AICOUNCIL_HOME` environment variable for custom locations
 
 ## Usage Examples 💬
 

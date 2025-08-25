@@ -1,12 +1,52 @@
 #!/bin/bash
 
-# AI Council Global Launcher
-# This script allows running 'council' from anywhere in the terminal
+# AI Council - Interactive Multi-Agent System
+# Usage: ./council [install]
 
-# Direct paths to your AI Council installation
-PROJECT_DIR="/Users/hijack/dev/python/AICouncil"
-VENV_DIR="$PROJECT_DIR/.venv"
+# Handle installation
+if [ "$1" = "install" ]; then
+    echo "🏛️ AI Council Installation"
+    echo "=========================="
+    
+    # Get the absolute path to this script
+    SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
+    
+    # Make sure script is executable
+    chmod +x "$SCRIPT_PATH"
+    
+    # Create local bin directory and symlink
+    mkdir -p ~/.local/bin
+    echo "📦 Creating global 'council' command..."
+    ln -sf "$SCRIPT_PATH" ~/.local/bin/council
+    
+    # Check PATH
+    if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+        echo "⚠️  Add ~/.local/bin to PATH in your shell profile:"
+        echo "   export PATH=\"\$HOME/.local/bin:\$PATH\""
+    fi
+    
+    # Check API key
+    if [ -z "$ANTHROPIC_API_KEY" ]; then
+        echo "🔑 Set your API key:"
+        echo "   export ANTHROPIC_API_KEY='your-key-here'"
+    fi
+    
+    echo "✅ Installation complete! Run 'council' from anywhere."
+    exit 0
+fi
+
+# Normal execution: Auto-detect project directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$SCRIPT_DIR"
+VENV_DIR="$PROJECT_DIR/.venv" 
 SRC_DIR="$PROJECT_DIR/src"
+
+# Alternative: Use environment variable if set
+if [ -n "$AICOUNCIL_HOME" ]; then
+    PROJECT_DIR="$AICOUNCIL_HOME"
+    VENV_DIR="$PROJECT_DIR/.venv"
+    SRC_DIR="$PROJECT_DIR/src"
+fi
 
 # Check if virtual environment exists
 if [ ! -d "$VENV_DIR" ]; then

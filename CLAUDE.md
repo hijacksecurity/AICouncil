@@ -100,16 +100,24 @@ cd src && python run.py
 ## Global Command Setup
 
 The `council` script automatically:
+- Auto-detects project location (no hardcoded paths)
 - Detects and activates the virtual environment
 - Checks for required API key
 - Runs from the correct directory
 - Provides helpful error messages
+- Works for any user without configuration
 
-To set up permanently:
+**Installation for any user:**
 ```bash
+# Single command installation
+./council install
+
 # Add API key to your shell profile
 echo 'export ANTHROPIC_API_KEY="your-key-here"' >> ~/.bashrc  # or ~/.zshrc
 source ~/.bashrc  # or restart terminal
+
+# Optional: Set custom project location
+echo 'export AICOUNCIL_HOME="/your/custom/path"' >> ~/.bashrc
 
 # Now run from anywhere
 council

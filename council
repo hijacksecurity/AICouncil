@@ -35,9 +35,16 @@ if [ "$1" = "install" ]; then
     exit 0
 fi
 
-# Normal execution: Auto-detect project directory
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_DIR="$SCRIPT_DIR"
+# Normal execution: Auto-detect project directory (resolve symlinks)
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+# Resolve symlinks to find the actual script location
+while [ -L "$SCRIPT_PATH" ]; do
+    SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+    SCRIPT_PATH="$(readlink "$SCRIPT_PATH")"
+    # If readlink gave us a relative path, make it absolute
+    [[ "$SCRIPT_PATH" != /* ]] && SCRIPT_PATH="$SCRIPT_DIR/$SCRIPT_PATH"
+done
+PROJECT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
 VENV_DIR="$PROJECT_DIR/.venv" 
 SRC_DIR="$PROJECT_DIR/src"
 
